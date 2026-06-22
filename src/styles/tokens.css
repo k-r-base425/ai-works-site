@@ -1,0 +1,18 @@
+:root {
+  --color-paper: #fbfcfa;
+  --color-surface: #ffffff;
+  --color-fog: #f1f5f7;
+  --color-ink: #252a34;
+  --color-muted: #687280;
+  --color-line: #dce5eb;
+  --color-blue: #4f9bcc;
+  --color-blue-deep: #2f7cae;
+  --color-teal: #88cfc1;
+  --color-purple: #9b94d9;
+  --color-orange: #e9894a;
+
+  --ai-works-card-radius: 22px;
+  --ai-works-pill-radius: 999px;
+  --ai-works-soft-shadow: 0 18px 44px rgba(43, 63, 84, 0.1);
+  --ai-works-float-shadow: 0 12px 28px rgba(43, 63, 84, 0.08);
+}

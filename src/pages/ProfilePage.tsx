@@ -3,9 +3,10 @@ import { BarChart3, FileText, FolderOpen, ImageIcon, Lightbulb, Monitor, Refresh
 import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, StageDots, StageLabel } from "../components/ui";
 import { profile } from "../data/site";
+import { assetPath } from "../lib/paths";
 
-const visualPack = "/assets/generated/visuals/hero-gallery.png";
-const iconPack = "/assets/generated/icons/document.png";
+const visualPack = assetPath("/assets/generated/visuals/hero-gallery.png");
+const iconPack = assetPath("/assets/generated/icons/document.png");
 
 const workKinds = [
   { title: "Web・LP", icon: Monitor, accent: "blue" },

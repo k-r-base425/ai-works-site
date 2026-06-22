@@ -3,6 +3,7 @@ import { ArrowDownUp, ChevronRight, FileText, Globe2, Image, Lightbulb, Pencil, 
 import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, StageLabel } from "../components/ui";
 import type { Accent } from "../data/site";
+import { assetPath } from "../lib/paths";
 
 const categories = [
   { label: "すべて", icon: SlidersHorizontal, active: true, accent: "blue" as Accent },
@@ -86,7 +87,7 @@ export function NotesPage() {
               </p>
             </div>
             <FloatingAsset className="mx-auto h-48 w-48 opacity-90" distance={8}>
-              <img src="/assets/generated/icons/document.png" alt="" className="h-full w-full rounded-3xl object-contain" />
+              <img src={assetPath("/assets/generated/icons/document.png")} alt="" className="h-full w-full rounded-3xl object-contain" />
             </FloatingAsset>
           </div>
           <div className="mt-7 flex max-w-sm items-center gap-4">

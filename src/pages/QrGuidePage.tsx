@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { BriefcaseBusiness, ChevronDown, CircleHelp, Coffee, ImageIcon, Laptop, Lightbulb, Search, Sparkles, UserRound } from "lucide-react";
 import { Reveal } from "../components/animation";
 import { StageLabel } from "../components/ui";
+import { assetPath } from "../lib/paths";
 
-const visualPack = "/assets/generated/visuals/qr-guide.png";
-const iconPack = "/assets/generated/icons/sparkle.png";
+const visualPack = assetPath("/assets/generated/visuals/qr-guide.png");
+const iconPack = assetPath("/assets/generated/icons/sparkle.png");
 
 const firstLinks = [
   { number: "1", title: "作品を見る", body: "AIでどんなものを作っているか見られます。", icon: ImageIcon, color: "teal" },

@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight, Clock3, Ear, FlaskConical, MonitorCog, Pencil, R
 import { FloatingAsset, Reveal } from "../components/animation";
 import { StageLabel } from "../components/ui";
 import type { Accent } from "../data/site";
+import { assetPath } from "../lib/paths";
 
 const steps = [
   { no: 1, stage: "STAGE 1", title: "聞く", body: "今の仕事、困っていること、作ってみたいものを整理します。", icon: Ear, accent: "blue" as Accent },
@@ -24,10 +25,10 @@ export function ProcessPage() {
       <Reveal>
         <section className="relative overflow-hidden rounded-card border border-line bg-white/72 px-5 py-12 text-center shadow-soft">
           <FloatingAsset className="absolute left-5 top-12 hidden h-24 w-24 rotate-[-4deg] opacity-60 sm:block" distance={7}>
-            <img src="/assets/generated/visuals/hero-gallery.png" alt="" className="h-full w-full rounded-2xl object-cover" />
+            <img src={assetPath("/assets/generated/visuals/hero-gallery.png")} alt="" className="h-full w-full rounded-2xl object-cover" />
           </FloatingAsset>
           <FloatingAsset className="absolute right-5 top-16 hidden h-24 w-24 rotate-[5deg] opacity-60 sm:block" distance={5}>
-            <img src="/assets/generated/icons/refresh.png" alt="" className="h-full w-full rounded-2xl object-contain" />
+            <img src={assetPath("/assets/generated/icons/refresh.png")} alt="" className="h-full w-full rounded-2xl object-contain" />
           </FloatingAsset>
           <StageLabel>STAGE 04 / PROCESS</StageLabel>
           <h1 className="mt-5 text-[44px] font-semibold leading-tight tracking-normal text-ink sm:text-6xl">つくり方</h1>

@@ -2,8 +2,10 @@ import { ArrowLeft, Eye, Heart, Home, Image as ImageIcon, Lightbulb, MonitorSmar
 import { Link } from "react-router-dom";
 import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, IconFromSheet, SoftButton, StageDots, StageLabel } from "../components/ui";
+import { assetPath } from "../lib/paths";
 
-const visualPack = "/assets/generated/visuals/hero-gallery.png";
+const visualPack = assetPath("/assets/generated/visuals/hero-gallery.png");
+const worksThumb = assetPath("/assets/generated/visuals/works-thumbnails.png");
 
 const aiUses = [
   { title: "構成づくり", icon: Network, accent: "teal" as const },
@@ -126,7 +128,7 @@ export function WorkDetailPage() {
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             {thumbs.map((thumb) => (
               <article key={thumb} className="overflow-hidden rounded-2xl border border-line bg-white shadow-float">
-                <img src={thumb === "Works" ? "/assets/generated/visuals/works-thumbnails.png" : visualPack} alt="" className="h-32 w-full object-cover" />
+                <img src={thumb === "Works" ? worksThumb : visualPack} alt="" className="h-32 w-full object-cover" />
                 <p className="px-3 py-3 text-center text-sm font-semibold text-ink">{thumb}</p>
               </article>
             ))}

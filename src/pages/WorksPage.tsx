@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, StageDots, StageLabel } from "../components/ui";
 import { works } from "../data/site";
+import { assetPath } from "../lib/paths";
 
-const worksVisual = "/assets/generated/visuals/works-thumbnails.png";
+const worksVisual = assetPath("/assets/generated/visuals/works-thumbnails.png");
 
 const categories = ["すべて", "Web・LP", "業務ツール", "画像生成", "資料"];
 
@@ -27,7 +28,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["自主制作", "画像生成"],
     accent: "purple" as const,
-    image: "/assets/generated/visuals/local-lp-preview.png",
+    image: assetPath("/assets/generated/visuals/local-lp-preview.png"),
   },
   {
     title: "Menu Draft Kit",
@@ -35,7 +36,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["資料・文章"],
     accent: "blue" as const,
-    image: "/assets/generated/visuals/qr-guide.png",
+    image: assetPath("/assets/generated/visuals/qr-guide.png"),
   },
   {
     title: "Local Shop LP",
@@ -43,7 +44,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["試作中"],
     accent: "orange" as const,
-    image: "/assets/generated/visuals/storefront.png",
+    image: assetPath("/assets/generated/visuals/storefront.png"),
   },
 ];
 

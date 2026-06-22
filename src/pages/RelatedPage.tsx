@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { ExternalLink, FileText, Newspaper, Sprout, Users } from "lucide-react";
 import { Reveal } from "../components/animation";
 import { StageLabel } from "../components/ui";
+import { assetPath } from "../lib/paths";
 
-const visualPack = "/assets/generated/visuals/storefront.png";
-const lpPreview = "/assets/generated/visuals/local-lp-preview.png";
-const iconPack = "/assets/generated/icons/storefront.png";
+const visualPack = assetPath("/assets/generated/visuals/storefront.png");
+const lpPreview = assetPath("/assets/generated/visuals/local-lp-preview.png");
+const iconPack = assetPath("/assets/generated/icons/storefront.png");
 
 const relationCards = [
   { title: "伝えるページを作る", body: "LPや紹介ページなど、伝わる形に整えます。", icon: Newspaper, color: "bg-teal/18 text-teal" },

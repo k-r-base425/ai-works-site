@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, IconFromSheet, SectionHeader, SoftButton, StageDots, StageLabel } from "../components/ui";
 import { features, profile, relatedActivity, stages, works } from "../data/site";
+import { assetPath } from "../lib/paths";
 
-const heroVisual = "/assets/generated/visuals/hero-gallery.png";
-const worksVisual = "/assets/generated/visuals/works-thumbnails.png";
-const profileVisual = "/assets/generated/visuals/profile-portrait.png";
-const storeVisual = "/assets/generated/visuals/storefront.png";
-const galleryIcon = "/assets/generated/icons/image.png";
+const heroVisual = assetPath("/assets/generated/visuals/hero-gallery.png");
+const worksVisual = assetPath("/assets/generated/visuals/works-thumbnails.png");
+const profileVisual = assetPath("/assets/generated/visuals/profile-portrait.png");
+const storeVisual = assetPath("/assets/generated/visuals/storefront.png");
+const galleryIcon = assetPath("/assets/generated/icons/image.png");
 
 const extraWorks = [
   {
@@ -25,7 +26,7 @@ const extraWorks = [
     href: "/works",
     tags: ["自主制作", "画像生成"],
     accent: "orange" as const,
-    image: "/assets/generated/visuals/local-lp-preview.png",
+    image: assetPath("/assets/generated/visuals/local-lp-preview.png"),
   },
 ];
 

@@ -11,6 +11,7 @@ import {
   Store,
   UserRoundCheck,
 } from "lucide-react";
+import { assetPath } from "../lib/paths";
 
 export type SiteRoute = {
   path: string;
@@ -80,7 +81,7 @@ export const works: Work[] = [
     href: "/works/ai-works",
     tags: ["自主制作", "ポートフォリオ"],
     accent: "teal",
-    image: "/assets/generated/visuals/hero-gallery.png",
+    image: assetPath("/assets/generated/visuals/hero-gallery.png"),
   },
   {
     title: "Swipe LP Demo",
@@ -88,7 +89,7 @@ export const works: Work[] = [
     href: "/works",
     tags: ["デモ制作", "LP"],
     accent: "purple",
-    image: "/assets/generated/visuals/works-thumbnails.png",
+    image: assetPath("/assets/generated/visuals/works-thumbnails.png"),
   },
 ];
 
@@ -108,7 +109,7 @@ export const memos: Memo[] = [
 export const profile = {
   name: "Ren Kawabata / 河端 蓮",
   role: "小規模事業者向け AI 制作・活用パートナー",
-  image: "/assets/generated/visuals/profile-portrait.png",
+  image: assetPath("/assets/generated/visuals/profile-portrait.png"),
 };
 
 export const relatedActivity = {

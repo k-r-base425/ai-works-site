@@ -4,6 +4,7 @@ import { FloatingAsset, Reveal } from "../components/animation";
 import { Badge, StageDots, StageLabel } from "../components/ui";
 import { features } from "../data/site";
 import type { Accent } from "../data/site";
+import { assetPath } from "../lib/paths";
 
 const accentText: Record<Accent, string> = {
   blue: "text-blue-deep",
@@ -46,7 +47,7 @@ export function CanDoPage() {
       <Reveal>
         <section className="relative overflow-hidden rounded-card border border-line bg-white/72 px-5 py-10 text-center shadow-soft sm:px-8">
           <FloatingAsset className="absolute left-5 top-12 hidden h-16 w-16 opacity-50 sm:block" distance={6}>
-            <img src="/assets/generated/icons/lightbulb.png" alt="" className="h-full w-full rounded-2xl object-contain" />
+            <img src={assetPath("/assets/generated/icons/lightbulb.png")} alt="" className="h-full w-full rounded-2xl object-contain" />
           </FloatingAsset>
           <StageDots active={2} />
           <div className="mt-7">

@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowRight, Clock3, Ear, FlaskConical, MonitorCog, Pencil, RefreshCcw, Sprout } from "lucide-react";
-import { FloatingAsset, Reveal } from "../components/animation";
-import { StageLabel } from "../components/ui";
+import type { LucideIcon } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock3, Ear, Flag, FlaskConical, Map, MonitorCog, Pencil, RefreshCcw, Route, Sprout } from "lucide-react";
+import { Reveal } from "../components/animation";
+import { IconFromSheet, RpgLabel, RpgPanel } from "../components/ui";
 import type { Accent } from "../data/site";
-import { assetPath } from "../lib/paths";
 
 const steps = [
   { no: 1, stage: "STAGE 1", title: "聞く", body: "今の仕事、困っていること、作ってみたいものを整理します。", icon: Ear, accent: "blue" as Accent },
@@ -12,123 +12,209 @@ const steps = [
   { no: 4, stage: "STAGE 4", title: "使いながら直す", body: "実際に使ってみて、必要なところを少しずつ改善します。", icon: RefreshCcw, accent: "orange" as Accent },
 ];
 
-const accent = {
-  blue: "text-blue-deep bg-blue-deep border-blue/35 from-blue/20",
-  teal: "text-teal bg-teal border-teal/35 from-teal/20",
-  purple: "text-purple bg-purple border-purple/35 from-purple/20",
-  orange: "text-orange bg-orange border-orange/35 from-orange/20",
-};
+const reasons = [
+  { label: "早く見える", icon: Clock3, accent: "teal" as Accent },
+  { label: "直しやすい", icon: Pencil, accent: "purple" as Accent },
+  { label: "無理なく続く", icon: Sprout, accent: "orange" as Accent },
+];
+
+const sampleRoute = [
+  { label: "売上を見たい", icon: MonitorCog, accent: "teal" as Accent },
+  { label: "管理画面の試作", icon: MonitorCog, accent: "blue" as Accent },
+  { label: "使いながら項目を調整", icon: RefreshCcw, accent: "orange" as Accent },
+];
 
 export function ProcessPage() {
   return (
     <div className="space-y-8 pb-8">
       <Reveal>
-        <section className="relative overflow-hidden rounded-card border border-line bg-white/72 px-5 py-12 text-center shadow-soft">
-          <FloatingAsset className="absolute left-5 top-12 hidden h-24 w-24 rotate-[-4deg] opacity-60 sm:block" distance={7}>
-            <img src={assetPath("/assets/generated/visuals/hero-gallery.png")} alt="" className="h-full w-full rounded-2xl object-cover" />
-          </FloatingAsset>
-          <FloatingAsset className="absolute right-5 top-16 hidden h-24 w-24 rotate-[5deg] opacity-60 sm:block" distance={5}>
-            <img src={assetPath("/assets/generated/icons/refresh.png")} alt="" className="h-full w-full rounded-2xl object-contain" />
-          </FloatingAsset>
-          <StageLabel>STAGE 04 / PROCESS</StageLabel>
-          <h1 className="mt-5 text-[44px] font-semibold leading-tight tracking-normal text-ink sm:text-6xl">つくり方</h1>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-8 text-ink sm:text-lg">
-            最初から大きく作り込むよりも、
-            <br />
-            小さく試して、見て、直すことを
-            <br />
-            大切にしています。
-          </p>
-        </section>
+        <RpgPanel className="-mx-4 px-5 py-7 sm:mx-0 sm:px-8">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#07121b_0%,#10283b_50%,#173a28_100%)]" aria-hidden="true" />
+          <div className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,242,167,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,242,167,0.22)_1px,transparent_1px)] [background-size:22px_22px]" aria-hidden="true" />
+          <div className="relative z-10 grid gap-7 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <RpgLabel>STAGE 05 / PROCESS</RpgLabel>
+                <span className="inline-flex items-center gap-2 rounded-sm border border-[#8fdfff]/70 bg-[#0e2a3b] px-3 py-1.5 text-[11px] font-black tracking-[0.16em] text-[#9de3ff]">
+                  <Route className="h-4 w-4" aria-hidden="true" />
+                  ROUTE MAP
+                </span>
+              </div>
+              <h1 className="mt-6 text-[44px] font-black leading-tight tracking-normal text-white drop-shadow-[0_4px_0_rgba(0,0,0,0.28)] sm:text-6xl">
+                つくり方
+              </h1>
+              <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-[#d9eff6] sm:text-lg">
+                最初から大きく作り込むよりも、小さく試して、見て、直すことを大切にしています。
+              </p>
+              <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2">
+                {steps.map((step) => (
+                  <span key={step.stage} className="rounded-md border-2 border-[#8fdfff]/75 bg-[#07121b]/70 px-3 py-3 text-center text-sm font-black text-[#9de3ff] shadow-[0_5px_0_rgba(0,0,0,0.3)]">
+                    {step.no}. {step.title}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-md border-[7px] border-[#d7bb68] bg-[#07121b] p-4 shadow-[0_24px_48px_rgba(0,0,0,0.34)]">
+              <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] sm:items-center">
+                {steps.map((step, index) => (
+                  <RouteNode key={step.stage} step={step} showArrow={index < steps.length - 1} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </RpgPanel>
       </Reveal>
 
-      <section className="relative space-y-4">
-        <motion.div
-          className="absolute bottom-12 left-8 top-8 hidden border-l-2 border-dotted border-blue/45 sm:block"
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          style={{ transformOrigin: "top" }}
-        />
-        {steps.map((step, index) => (
-          <Reveal key={step.stage} delay={index * 0.05}>
-            <motion.article
-              whileHover={{ y: -3 }}
-              className="relative grid gap-4 rounded-card border border-line bg-white/86 p-5 shadow-float sm:grid-cols-[4rem_10rem_1fr] sm:items-center"
-            >
-              <span className={`flex h-14 w-14 items-center justify-center rounded-full text-2xl font-bold text-white ${accent[step.accent].split(" ")[1]}`}>
-                {step.no}
-              </span>
-              <div className={`flex aspect-square max-w-36 items-center justify-center rounded-full bg-gradient-to-br ${accent[step.accent].split(" ")[3]} to-white`}>
-                <step.icon className={`h-16 w-16 ${accent[step.accent].split(" ")[0]}`} strokeWidth={1.45} aria-hidden="true" />
-              </div>
-              <div>
-                <span className={`inline-flex rounded-lg px-4 py-1 text-sm font-bold text-white ${accent[step.accent].split(" ")[1]}`}>
-                  {step.stage}
-                </span>
-                <h2 className="mt-3 text-3xl font-semibold text-ink">{step.title}</h2>
-                <p className="mt-2 text-base leading-8 text-ink">{step.body}</p>
-              </div>
-            </motion.article>
-          </Reveal>
-        ))}
-        <div className="hidden pl-8 text-blue/60 sm:block">
-          <ArrowDown className="h-8 w-8" aria-hidden="true" />
+      <section className="space-y-5">
+        <div className="flex items-center justify-between gap-4 border-b-2 border-[#d7bb68] pb-3">
+          <div className="flex items-center gap-3">
+            <Map className="h-6 w-6 text-[#d31572]" strokeWidth={1.8} />
+            <div>
+              <RpgLabel>STAGE ROUTE</RpgLabel>
+              <h2 className="mt-2 text-2xl font-black text-ink">制作の進め方</h2>
+            </div>
+          </div>
+          <div className="hidden gap-2 sm:flex">
+            {["bg-teal", "bg-[#d31572]", "bg-orange"].map((color) => (
+              <span key={color} className={`h-3 w-3 rounded-full ${color}`} />
+            ))}
+          </div>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-2">
+          {steps.map((step, index) => (
+            <Reveal key={step.stage} delay={index * 0.05}>
+              <motion.article
+                whileHover={{ y: -3 }}
+                className="grid h-full gap-4 rounded-md border-2 border-[#d7bb68] bg-[#07121b] p-4 text-[#eef8ff] shadow-float sm:grid-cols-[6rem_1fr]"
+              >
+                <div className="flex flex-col items-center justify-center gap-3 rounded-sm border border-[#f2e9c6]/55 bg-[#10283b] p-3">
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[#fff2a7] bg-[#07121b] text-sm font-black text-[#fff2a7]">
+                    {step.no}
+                  </span>
+                  <IconFromSheet icon={step.icon} accent={step.accent} />
+                </div>
+                <div className="min-w-0">
+                  <RpgLabel>{step.stage}</RpgLabel>
+                  <h3 className="mt-3 text-2xl font-black leading-tight text-white">{step.title}</h3>
+                  <p className="mt-3 text-sm font-semibold leading-7 text-[#d9eff6] sm:text-base">{step.body}</p>
+                </div>
+              </motion.article>
+            </Reveal>
+          ))}
         </div>
       </section>
 
       <Reveal>
-        <section className="rounded-card bg-teal/10 p-5 shadow-float">
-          <h2 className="flex items-center justify-center gap-4 text-xl font-semibold text-teal">
-            <span className="h-px flex-1 border-t border-dotted border-teal/50" />
-            小さく始める理由
-            <span className="h-px flex-1 border-t border-dotted border-teal/50" />
-          </h2>
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            {[
-              { label: "早く見える", icon: Clock3 },
-              { label: "直しやすい", icon: Pencil },
-              { label: "無理なく続く", icon: Sprout },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center justify-center gap-3 rounded-full bg-white px-4 py-3 font-semibold text-ink shadow-float">
-                <item.icon className="h-6 w-6 text-teal" aria-hidden="true" />
-                {item.label}
+        <RpgPanel className="p-5 sm:p-6">
+          <div className="relative z-10">
+            <div className="flex items-center gap-3">
+              <CheckCircle2 className="h-7 w-7 text-[#fff2a7]" strokeWidth={1.8} aria-hidden="true" />
+              <div>
+                <RpgLabel>ROUTE BONUS</RpgLabel>
+                <h2 className="mt-2 text-2xl font-black text-white">小さく始める理由</h2>
               </div>
-            ))}
+            </div>
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              {reasons.map((reason) => (
+                <article key={reason.label} className="rounded-md border border-[#d7bb68]/80 bg-[#10283b] p-4 text-center shadow-float">
+                  <div className="flex justify-center">
+                    <IconFromSheet icon={reason.icon} accent={reason.accent} />
+                  </div>
+                  <h3 className="mt-4 text-lg font-black text-white">{reason.label}</h3>
+                </article>
+              ))}
+            </div>
           </div>
-        </section>
+        </RpgPanel>
       </Reveal>
 
       <Reveal>
-        <section className="rounded-card border border-orange/25 bg-orange/10 p-5 shadow-float">
-          <StageLabel accent="orange">たとえば</StageLabel>
-          <div className="mt-5 grid gap-3 text-center font-semibold text-ink sm:grid-cols-[1fr_auto_1fr_auto_1fr] sm:items-center">
-            <Example icon={MonitorCog} label="売上を見たい" />
-            <ArrowRight className="mx-auto hidden h-6 w-6 text-muted sm:block" aria-hidden="true" />
-            <Example icon={MonitorCog} label="管理画面の試作" />
-            <ArrowRight className="mx-auto hidden h-6 w-6 text-muted sm:block" aria-hidden="true" />
-            <Example icon={RefreshCcw} label="使いながら項目を調整" />
+        <RpgPanel className="p-5 sm:p-6">
+          <div className="relative z-10">
+            <div className="flex items-center gap-3">
+              <Flag className="h-7 w-7 text-[#fff2a7]" strokeWidth={1.8} aria-hidden="true" />
+              <div>
+                <RpgLabel>SAMPLE ROUTE</RpgLabel>
+                <h2 className="mt-2 text-2xl font-black text-white">たとえば</h2>
+              </div>
+            </div>
+            <div className="mt-6 grid gap-3 text-center font-black text-[#eef8ff] lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-center">
+              {sampleRoute.map((item, index) => (
+                <SampleNode key={item.label} item={item} showArrow={index < sampleRoute.length - 1} />
+              ))}
+            </div>
           </div>
-        </section>
+        </RpgPanel>
       </Reveal>
 
       <Reveal>
-        <p className="rounded-card border border-line bg-white/86 p-5 text-base font-semibold leading-8 text-ink shadow-float">
-          完璧を目指すより、まず動くこと。一緒に、小さくてちょうどいい形を見つけていきましょう。
-        </p>
+        <RpgPanel className="p-5 sm:p-6">
+          <div className="relative z-10 flex items-center gap-4">
+            <Sprout className="h-10 w-10 shrink-0 text-[#fff2a7]" strokeWidth={1.6} aria-hidden="true" />
+            <div>
+              <RpgLabel>NEXT STEP</RpgLabel>
+              <p className="mt-3 text-base font-bold leading-8 text-[#eef8ff]">
+                完璧を目指すより、まず動くこと。一緒に、小さくてちょうどいい形を見つけていきましょう。
+              </p>
+            </div>
+          </div>
+        </RpgPanel>
       </Reveal>
     </div>
   );
 }
 
-function Example({ icon: Icon, label }: { icon: typeof MonitorCog; label: string }) {
+function RouteNode({
+  step,
+  showArrow,
+}: {
+  step: (typeof steps)[number];
+  showArrow: boolean;
+}) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-float">
-        <Icon className="h-8 w-8 text-orange" aria-hidden="true" />
-      </span>
-      {label}
-    </div>
+    <>
+      <div className="rounded-sm border border-[#f2e9c6]/60 bg-[#10283b] p-3 text-center">
+        <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-sm border border-[#fff2a7] bg-[#07121b] text-sm font-black text-[#fff2a7]">
+          {step.no}
+        </span>
+        <div className="mt-3 flex justify-center">
+          <step.icon className="h-7 w-7 text-[#9de3ff]" strokeWidth={1.7} aria-hidden="true" />
+        </div>
+        <p className="mt-2 text-sm font-black text-white">{step.title}</p>
+      </div>
+      {showArrow ? (
+        <div className="flex justify-center text-[#fff2a7]">
+          <ArrowRight className="hidden h-6 w-6 sm:block" aria-hidden="true" />
+          <span className="h-6 border-l border-[#fff2a7]/70 sm:hidden" aria-hidden="true" />
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+function SampleNode({
+  item,
+  showArrow,
+}: {
+  item: { label: string; icon: LucideIcon; accent: Accent };
+  showArrow: boolean;
+}) {
+  return (
+    <>
+      <div className="rounded-md border border-[#d7bb68]/80 bg-[#10283b] p-4">
+        <div className="flex justify-center">
+          <IconFromSheet icon={item.icon} accent={item.accent} />
+        </div>
+        <p className="mt-3 text-sm leading-6 text-white">{item.label}</p>
+      </div>
+      {showArrow ? (
+        <div className="flex justify-center text-[#fff2a7]">
+          <ArrowRight className="hidden h-6 w-6 lg:block" aria-hidden="true" />
+          <span className="h-6 border-l border-[#fff2a7]/70 lg:hidden" aria-hidden="true" />
+        </div>
+      ) : null}
+    </>
   );
 }

@@ -9,7 +9,7 @@ const primaryRoutes = routes.filter((route) => route.navGroup === "primary");
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-paper text-ink">
-      <header className="sticky top-0 z-30 border-b border-line/70 bg-white/88 shadow-[0_8px_24px_rgba(43,63,84,0.06)] backdrop-blur">
+      <header className="sticky top-0 z-30 border-b border-line/70 bg-white/95 shadow-[0_8px_24px_rgba(43,63,84,0.06)] backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <NavLink to="/" className="flex items-center gap-2.5 rounded-full text-2xl font-bold tracking-normal text-ink">
             <span className="relative h-8 w-9" aria-hidden="true">

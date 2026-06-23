@@ -1,11 +1,14 @@
-import { ArrowRight, Image as ImageIcon, Menu, Sparkles } from "lucide-react";
+import { ArrowRight, ClipboardList, Compass, Image as ImageIcon, Menu, ScrollText, Sparkles, Trophy } from "lucide-react";
 import { Link } from "react-router-dom";
-import { FloatingAsset, Reveal } from "../components/animation";
-import { Badge, StageDots, StageLabel } from "../components/ui";
+import { Reveal } from "../components/animation";
+import { Badge, RpgButton, RpgLabel, RpgPanel, RpgQuestCard } from "../components/ui";
 import { works } from "../data/site";
 import { assetPath } from "../lib/paths";
 
 const worksVisual = assetPath("/assets/generated/visuals/works-thumbnails.png");
+const localPreview = assetPath("/assets/generated/visuals/local-lp-preview.png");
+const qrPreview = assetPath("/assets/generated/visuals/qr-guide.png");
+const storeVisual = assetPath("/assets/generated/visuals/storefront.png");
 
 const categories = ["すべて", "Web・LP", "業務ツール", "画像生成", "資料"];
 
@@ -28,7 +31,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["自主制作", "画像生成"],
     accent: "purple" as const,
-    image: assetPath("/assets/generated/visuals/local-lp-preview.png"),
+    image: localPreview,
   },
   {
     title: "Menu Draft Kit",
@@ -36,7 +39,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["資料・文章"],
     accent: "blue" as const,
-    image: assetPath("/assets/generated/visuals/qr-guide.png"),
+    image: qrPreview,
   },
   {
     title: "Local Shop LP",
@@ -44,7 +47,7 @@ const galleryWorks = [
     href: "/works",
     tags: ["試作中"],
     accent: "orange" as const,
-    image: assetPath("/assets/generated/visuals/storefront.png"),
+    image: storeVisual,
   },
 ];
 
@@ -52,72 +55,105 @@ export function WorksPage() {
   return (
     <div className="space-y-8 pb-8">
       <Reveal>
-        <section className="relative overflow-hidden rounded-card border border-line bg-white/78 p-6 shadow-soft sm:p-8">
-          <FloatingAsset className="absolute right-8 top-8 text-teal" distance={6}>
-            <Sparkles className="h-7 w-7" strokeWidth={1.8} />
-          </FloatingAsset>
-          <div className="absolute right-16 top-24 grid grid-cols-4 gap-2 opacity-40">
-            {Array.from({ length: 16 }).map((_, index) => (
-              <span key={index} className="h-1.5 w-1.5 rounded-full bg-purple" />
-            ))}
+        <RpgPanel className="-mx-4 px-5 py-7 sm:mx-0 sm:px-8">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#07121b_0%,#10283b_52%,#173a28_100%)]" aria-hidden="true" />
+          <div className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,242,167,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,242,167,0.22)_1px,transparent_1px)] [background-size:22px_22px]" aria-hidden="true" />
+          <div className="relative z-10 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <div className="flex flex-wrap items-center gap-3">
+                <RpgLabel>STAGE 02 / WORKS</RpgLabel>
+                <span className="inline-flex items-center gap-2 rounded-sm border border-[#8fdfff]/70 bg-[#0e2a3b] px-3 py-1.5 text-[11px] font-black tracking-[0.16em] text-[#9de3ff]">
+                  <Trophy className="h-4 w-4" aria-hidden="true" />
+                  {galleryWorks.length} QUESTS
+                </span>
+              </div>
+              <h1 className="mt-6 text-[46px] font-black leading-none tracking-normal text-white drop-shadow-[0_4px_0_rgba(0,0,0,0.28)] sm:text-7xl">
+                Works
+                <span className="mt-3 block text-3xl text-[#7ee7ff] sm:text-4xl">/ 作品一覧</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-[#d9eff6] sm:text-lg">
+                AIを使って作ったもの、試しているもの、これから整えていくものをクエスト掲示板のように並べています。
+              </p>
+              <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-5 lg:grid-cols-2">
+                {categories.map((category, index) => (
+                  <button
+                    key={category}
+                    type="button"
+                    className={
+                      index === 0
+                        ? "min-h-11 rounded-md border-2 border-[#fff2a7] bg-[#d31572] px-3 text-sm font-black text-white shadow-[0_5px_0_rgba(75,20,48,0.85)]"
+                        : "min-h-11 rounded-md border-2 border-[#8fdfff]/75 bg-[#07121b]/70 px-3 text-sm font-black text-[#9de3ff] shadow-[0_5px_0_rgba(0,0,0,0.28)]"
+                    }
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-md border-[7px] border-[#d7bb68] bg-[#07121b] p-1 shadow-[0_24px_48px_rgba(0,0,0,0.34)]">
+                <img src={worksVisual} alt="" className="aspect-[1.58/1] w-full rounded-sm object-cover" />
+              </div>
+              <div className="mt-3 rounded-md border-2 border-[#f2e9c6] bg-[#07121b]/92 p-3 shadow-[0_14px_28px_rgba(0,0,0,0.28)]">
+                <div className="flex items-center gap-3">
+                  <Compass className="h-6 w-6 shrink-0 text-[#fff2a7]" aria-hidden="true" />
+                  <p className="text-sm font-black leading-6 text-[#eef8ff]">気になるクエストから、制作の方向を見ていきます。</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <StageLabel accent="purple">STAGE 01 / WORKS</StageLabel>
-          <div className="mt-5">
-            <StageDots active={0} count={8} />
-          </div>
-          <h1 className="mt-8 text-[52px] font-semibold leading-none tracking-normal text-ink sm:text-7xl">
-            Works <span className="mt-3 block text-3xl sm:inline sm:text-4xl">/ 作品一覧</span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-9 text-ink">AIを使って作ったもの、試しているもの、これから整えていくものを並べています。</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {categories.map((category, index) => (
-              <button
-                key={category}
-                type="button"
-                className={
-                  index === 0
-                    ? "rounded-full bg-blue px-7 py-3 text-sm font-semibold text-white shadow-float"
-                    : "rounded-full border border-line bg-white/78 px-7 py-3 text-sm font-semibold text-ink shadow-float"
-                }
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </section>
+        </RpgPanel>
       </Reveal>
 
-      <Reveal delay={0.08}>
+      <Reveal delay={0.06}>
         <section className="space-y-5">
-          <div className="flex items-center justify-between gap-4 border-b border-line pb-3">
-            <div className="flex items-center gap-3 text-purple">
-              <ImageIcon className="h-5 w-5" strokeWidth={1.8} />
-              <h2 className="text-sm font-semibold tracking-[0.18em]">GALLERY SHELF</h2>
+          <div className="flex items-center justify-between gap-4 border-b-2 border-[#d7bb68] pb-3">
+            <div className="flex items-center gap-3">
+              <ScrollText className="h-6 w-6 text-[#d31572]" strokeWidth={1.8} />
+              <div>
+                <RpgLabel>QUEST BOARD</RpgLabel>
+                <h2 className="mt-2 text-2xl font-black text-ink">依頼書一覧</h2>
+              </div>
             </div>
-            <div className="flex gap-4">
-              <span className="h-3 w-3 rounded-full bg-teal" />
-              <span className="h-3 w-3 rounded-full bg-purple" />
-              <span className="h-3 w-3 rounded-full bg-orange" />
+            <div className="hidden gap-2 sm:flex">
+              {["bg-teal", "bg-[#d31572]", "bg-orange"].map((color) => (
+                <span key={color} className={`h-3 w-3 rounded-full ${color}`} />
+              ))}
             </div>
           </div>
+
           <div className="grid gap-5 sm:grid-cols-2">
             {galleryWorks.map((work, index) => (
-              <Reveal key={work.title} delay={0.04 * (index % 4)}>
-                <article className="rounded-card border border-line bg-white/84 p-4 shadow-float">
-                  <img src={work.image} alt="" className="h-48 w-full rounded-2xl object-cover object-center" />
-                  <h3 className="mt-4 text-2xl font-semibold leading-tight text-ink">{work.title}</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {work.tags.map((tag) => (
-                      <Badge key={tag} accent={work.accent}>
-                        {tag}
-                      </Badge>
-                    ))}
+              <Reveal key={work.title} delay={0.035 * (index % 4)}>
+                <article className="grid h-full gap-4 rounded-md border-2 border-[#d7bb68] bg-[#07121b] p-3 text-[#eef8ff] shadow-float transition hover:-translate-y-0.5 md:grid-cols-[10rem_1fr]">
+                  <div className="overflow-hidden rounded-sm border border-[#f2e9c6]/60 bg-[#10283b]">
+                    <img src={work.image} alt="" className="aspect-[1.35/1] h-full w-full object-cover md:aspect-square" />
                   </div>
-                  <p className="mt-3 min-h-14 text-base leading-8 text-ink">{work.description}</p>
-                  <Link to={work.href} className="mt-4 inline-flex w-full items-center justify-center gap-3 rounded-full border border-blue/45 bg-white/75 px-5 py-3 text-base font-semibold text-blue-deep">
-                    詳しく見る
-                    <ArrowRight className="h-5 w-5" />
-                  </Link>
+                  <div className="flex min-w-0 flex-col">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <RpgLabel>{`QUEST ${String(index + 1).padStart(2, "0")}`}</RpgLabel>
+                      <span className="rounded-sm border border-[#8fdfff]/55 bg-[#10283b] px-2.5 py-1 text-[11px] font-black text-[#9de3ff]">
+                        {index === 0 ? "MAIN" : "SUB"}
+                      </span>
+                    </div>
+                    <h3 className="mt-3 text-2xl font-black leading-tight text-white">{work.title}</h3>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {work.tags.map((tag) => (
+                        <Badge key={tag} accent={work.accent}>
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <p className="mt-3 flex-1 text-sm font-semibold leading-7 text-[#d9eff6]">{work.description}</p>
+                    <Link
+                      to={work.href}
+                      className="mt-4 inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-md border-2 border-[#8fdfff] bg-[#0e2a3b] px-4 text-sm font-black text-[#9de3ff] shadow-[0_5px_0_rgba(0,0,0,0.34)] transition hover:-translate-y-0.5"
+                    >
+                      詳しく見る
+                      <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                    </Link>
+                  </div>
                 </article>
               </Reveal>
             ))}
@@ -125,13 +161,31 @@ export function WorksPage() {
         </section>
       </Reveal>
 
-      <Reveal delay={0.12}>
-        <section className="flex items-center justify-between gap-4 rounded-2xl border border-dashed border-line bg-white/64 px-5 py-4 text-center shadow-float">
-          <Sparkles className="h-8 w-8 text-purple" strokeWidth={1.8} />
-          <p className="text-base leading-7 text-ink">新しい試作や改善中のものも追加していきます。</p>
-          <Menu className="h-7 w-7 text-blue-deep" strokeWidth={1.8} />
-        </section>
+      <Reveal delay={0.1}>
+        <div className="grid gap-4 lg:grid-cols-[1fr_0.72fr]">
+          <RpgPanel className="p-5">
+            <div className="relative z-10 flex items-center gap-4">
+              <Sparkles className="h-8 w-8 shrink-0 text-[#fff2a7]" strokeWidth={1.8} />
+              <div>
+                <RpgLabel>NEXT QUEST</RpgLabel>
+                <p className="mt-3 text-base font-bold leading-7 text-[#eef8ff]">新しい試作や改善中のものも追加していきます。</p>
+              </div>
+            </div>
+          </RpgPanel>
+          <RpgQuestCard
+            title="AI WORKSの進行ログ"
+            body="トップから順番に、各ページをRPG風UIへ整えていきます。"
+            meta="UPDATE"
+            image={worksVisual}
+          />
+        </div>
       </Reveal>
+
+      <div className="sr-only">
+        <ImageIcon />
+        <Menu />
+        <ClipboardList />
+      </div>
     </div>
   );
 }

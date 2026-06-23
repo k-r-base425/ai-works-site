@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -213,5 +214,92 @@ export function StageTimeline({ stages }: { stages: Stage[] }) {
         </article>
       ))}
     </div>
+  );
+}
+
+type RpgPanelProps = {
+  children: ReactNode;
+  className?: string;
+  as?: "section" | "article" | "div";
+};
+
+export function RpgPanel({ children, className, as: Component = "section" }: RpgPanelProps) {
+  return (
+    <Component
+      className={joinClasses(
+        "relative overflow-hidden rounded-md border-2 border-[#d7bb68] bg-[#07121b] text-[#eef8ff] shadow-[0_18px_36px_rgba(7,18,27,0.22)]",
+        "before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-[#8e6519] before:via-[#fff2a7] before:to-[#d5a62e]",
+        "after:absolute after:inset-x-0 after:bottom-0 after:h-1 after:bg-gradient-to-r after:from-[#d5a62e] after:via-[#fff2a7] after:to-[#8e6519]",
+        className,
+      )}
+    >
+      {children}
+    </Component>
+  );
+}
+
+export function RpgLabel({ children }: { children: string }) {
+  return (
+    <span className="inline-flex items-center rounded-sm border border-[#e8d88c] bg-[#0e2a3b] px-3 py-1.5 text-[11px] font-black tracking-[0.18em] text-[#fff2a7]">
+      {children}
+    </span>
+  );
+}
+
+export function RpgButton({
+  children,
+  href,
+  variant = "primary",
+}: {
+  children: ReactNode;
+  href: string;
+  variant?: "primary" | "secondary";
+}) {
+  return (
+    <Link
+      to={href}
+      className={joinClasses(
+        "inline-flex min-h-[3.25rem] items-center justify-center gap-3 rounded-md border-2 px-5 py-3 text-sm font-black shadow-[0_6px_0_rgba(0,0,0,0.42)] transition hover:-translate-y-0.5",
+        variant === "primary"
+          ? "border-[#fff2a7] bg-[#d31572] text-white"
+          : "border-[#8fdfff] bg-[#0e2a3b] text-[#9de3ff]",
+      )}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+    </Link>
+  );
+}
+
+export function RpgQuestCard({
+  title,
+  body,
+  meta,
+  image,
+  href,
+}: {
+  title: string;
+  body: string;
+  meta: string;
+  image?: string;
+  href?: string;
+}) {
+  const content = (
+    <article className="h-full overflow-hidden rounded-md border border-[#d7bb68]/80 bg-[#10283b] shadow-float transition hover:-translate-y-0.5">
+      {image ? <img src={image} alt="" className="aspect-[1.62/1] w-full object-cover" /> : null}
+      <div className="space-y-3 p-4">
+        <RpgLabel>{meta}</RpgLabel>
+        <h3 className="text-lg font-black leading-tight text-white">{title}</h3>
+        <p className="text-sm font-semibold leading-7 text-[#d9eff6]">{body}</p>
+      </div>
+    </article>
+  );
+
+  return href ? (
+    <Link to={href} className="block h-full">
+      {content}
+    </Link>
+  ) : (
+    content
   );
 }

@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDownUp, ChevronRight, FileText, Globe2, Image, Lightbulb, Pencil, Pin, Search, SlidersHorizontal } from "lucide-react";
-import { FloatingAsset, Reveal } from "../components/animation";
-import { Badge, StageLabel } from "../components/ui";
+import type { LucideIcon } from "lucide-react";
+import { ArrowDownUp, BookOpenText, FileText, Globe2, Image, Lightbulb, Pencil, Pin, Search, SlidersHorizontal } from "lucide-react";
+import { Reveal } from "../components/animation";
+import { IconFromSheet, RpgLabel, RpgPanel } from "../components/ui";
 import type { Accent } from "../data/site";
-import { assetPath } from "../lib/paths";
 
 const categories = [
   { label: "すべて", icon: SlidersHorizontal, active: true, accent: "blue" as Accent },
@@ -57,118 +57,166 @@ const notes = [
   },
 ];
 
-const accentText: Record<Accent, string> = {
-  blue: "text-blue-deep",
-  teal: "text-teal",
-  purple: "text-purple",
-  orange: "text-orange",
-};
-
-const accentSoft: Record<Accent, string> = {
-  blue: "bg-blue/10",
-  teal: "bg-teal/10",
-  purple: "bg-purple/10",
-  orange: "bg-orange/10",
-};
+const statusItems = [
+  { label: "LOGS", value: String(notes.length).padStart(2, "0") },
+  { label: "TABS", value: String(categories.length).padStart(2, "0") },
+  { label: "LATEST", value: notes[0].date },
+];
 
 export function NotesPage() {
   return (
-    <div className="space-y-7 pb-8">
+    <div className="space-y-8 pb-8">
       <Reveal>
-        <section className="relative overflow-hidden rounded-card border border-line bg-white/72 p-5 shadow-soft sm:p-8">
-          <div className="grid gap-6 sm:grid-cols-[1fr_15rem] sm:items-center">
+        <RpgPanel className="-mx-4 px-5 py-7 sm:mx-0 sm:px-8">
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,#07121b_0%,#10283b_48%,#173a28_100%)]" aria-hidden="true" />
+          <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(255,242,167,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,242,167,0.2)_1px,transparent_1px)] [background-size:24px_24px]" aria-hidden="true" />
+          <div className="relative z-10 grid gap-7 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div>
-              <StageLabel>STAGE 05 / NOTES</StageLabel>
-              <h1 className="mt-6 text-[42px] font-semibold leading-tight tracking-normal text-ink sm:text-6xl">AI活用メモ</h1>
-              <p className="mt-5 max-w-xl text-lg leading-9 text-ink">
-                試して分かったこと、
-                <br />
-                仕事に使えそうなことを短く残しています。
+              <div className="flex flex-wrap items-center gap-3">
+                <RpgLabel>STAGE 06 / NOTES</RpgLabel>
+                <span className="inline-flex items-center gap-2 rounded-sm border border-[#8fdfff]/70 bg-[#0e2a3b] px-3 py-1.5 text-[11px] font-black tracking-[0.16em] text-[#9de3ff]">
+                  <BookOpenText className="h-4 w-4" aria-hidden="true" />
+                  QUEST LOG
+                </span>
+              </div>
+              <h1 className="mt-6 text-[42px] font-black leading-tight tracking-normal text-white drop-shadow-[0_4px_0_rgba(0,0,0,0.28)] sm:text-6xl">
+                AI活用メモ
+              </h1>
+              <p className="mt-6 max-w-2xl text-base font-semibold leading-8 text-[#d9eff6] sm:text-lg">
+                試して分かったこと、仕事に使えそうなことを短く残しています。
               </p>
             </div>
-            <FloatingAsset className="mx-auto h-48 w-48 opacity-90" distance={8}>
-              <img src={assetPath("/assets/generated/icons/document.png")} alt="" className="h-full w-full rounded-3xl object-contain" />
-            </FloatingAsset>
-          </div>
-          <div className="mt-7 flex max-w-sm items-center gap-4">
-            {["01", "02", "03", "04", "05"].map((item, index) => (
-              <div key={item} className="flex flex-col items-center gap-2 text-xs font-semibold text-muted">
-                <span className={`h-4 w-4 rounded-full ${index === 4 ? "bg-blue" : "bg-muted/35"}`} />
-                <span className={index === 4 ? "text-blue-deep" : ""}>{item}</span>
+
+            <div className="rounded-md border-[7px] border-[#d7bb68] bg-[#07121b] p-4 shadow-[0_24px_48px_rgba(0,0,0,0.34)]">
+              <div className="grid gap-3 sm:grid-cols-3">
+                {statusItems.map((item) => (
+                  <div key={item.label} className="rounded-sm border border-[#f2e9c6]/60 bg-[#10283b] p-4 text-center">
+                    <p className="text-[11px] font-black tracking-[0.18em] text-[#9de3ff]">{item.label}</p>
+                    <p className="mt-3 text-xl font-black leading-tight text-[#fff2a7]">{item.value}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="mt-4 grid gap-3">
+                {notes.slice(0, 3).map((note, index) => (
+                  <div key={note.title} className="grid grid-cols-[4.25rem_1fr] items-center gap-3 rounded-sm border border-[#8fdfff]/35 bg-[#0e2a3b]/90 p-3">
+                    <span className="rounded-sm border border-[#fff2a7]/80 bg-[#07121b] px-2 py-1 text-center text-[11px] font-black text-[#fff2a7]">
+                      LOG {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="truncate text-sm font-black text-white">{note.title}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </section>
+        </RpgPanel>
       </Reveal>
 
       <Reveal>
-        <div className="flex flex-wrap gap-3 pb-1">
-          {categories.map((category) => (
-            <motion.button
-              key={category.label}
-              whileHover={{ y: -2 }}
-              className={`inline-flex min-w-[6.5rem] flex-1 items-center justify-center gap-2 rounded-full border px-4 py-3 text-base font-semibold shadow-float sm:flex-none ${
-                category.active ? "border-blue bg-blue text-white" : "border-line bg-white/82 text-ink"
-              }`}
-              type="button"
-            >
-              <category.icon className="h-5 w-5" aria-hidden="true" />
-              {category.label}
-            </motion.button>
-          ))}
-        </div>
-      </Reveal>
+        <RpgPanel className="p-4 sm:p-5">
+          <div className="relative z-10 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+              {categories.map((category) => (
+                <motion.button
+                  key={category.label}
+                  whileHover={{ y: -2 }}
+                  className={`inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-md border-2 px-3 py-2 text-sm font-black shadow-[0_5px_0_rgba(0,0,0,0.3)] ${
+                    category.active
+                      ? "border-[#fff2a7] bg-[#d31572] text-white"
+                      : "border-[#8fdfff]/70 bg-[#0e2a3b] text-[#9de3ff]"
+                  }`}
+                  type="button"
+                >
+                  <category.icon className="h-4 w-4" aria-hidden="true" />
+                  {category.label}
+                </motion.button>
+              ))}
+            </div>
 
-      <Reveal>
-        <div className="flex items-center justify-between">
-          <button className="inline-flex items-center gap-2 text-base font-medium text-muted" type="button">
-            <ArrowDownUp className="h-5 w-5" aria-hidden="true" />
-            新しい順
-          </button>
-          <button className="flex h-14 w-14 items-center justify-center rounded-full border border-line bg-white/82 text-ink shadow-float" type="button" aria-label="検索">
-            <Search className="h-7 w-7" aria-hidden="true" />
-          </button>
-        </div>
+            <div className="grid grid-cols-[1fr_auto] gap-3">
+              <button className="inline-flex min-h-[3rem] items-center justify-center gap-2 rounded-md border-2 border-[#8fdfff]/70 bg-[#0e2a3b] px-4 py-2 text-sm font-black text-[#9de3ff] shadow-[0_5px_0_rgba(0,0,0,0.3)]" type="button">
+                <ArrowDownUp className="h-4 w-4" aria-hidden="true" />
+                新しい順
+              </button>
+              <button className="flex h-12 w-12 items-center justify-center rounded-md border-2 border-[#fff2a7] bg-[#10283b] text-[#fff2a7] shadow-[0_5px_0_rgba(0,0,0,0.3)]" type="button" aria-label="検索">
+                <Search className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </RpgPanel>
       </Reveal>
 
       <section className="space-y-4">
         {notes.map((note, index) => (
           <Reveal key={note.title} delay={index * 0.04}>
-            <motion.article
-              whileHover={{ y: -3 }}
-              className={`relative grid gap-4 rounded-card border bg-white/86 p-4 shadow-float sm:grid-cols-[12rem_1fr_auto] sm:items-center ${
-                note.pickup ? "border-orange/40 bg-orange/5" : "border-line"
-              }`}
-            >
-              {note.pickup ? (
-                <>
-                  <span className="absolute left-6 top-6 rounded-md bg-orange px-4 py-1 text-sm font-bold text-white">PICK UP</span>
-                  <Pin className="absolute right-6 top-6 h-6 w-6 text-orange" aria-hidden="true" />
-                </>
-              ) : null}
-              <div className={`flex aspect-[4/3] items-center justify-center rounded-2xl ${accentSoft[note.accent]} ${note.pickup ? "mt-8 sm:mt-0" : ""}`}>
-                <note.icon className={`h-16 w-16 ${accentText[note.accent]}`} strokeWidth={1.45} aria-hidden="true" />
-              </div>
-              <div>
-                <p className="text-base font-medium text-muted">{note.date}</p>
-                <h2 className="mt-2 text-xl font-semibold leading-snug text-ink sm:text-2xl">{note.title}</h2>
-                <div className="mt-3">
-                  <Badge accent={note.accent}>{note.tag}</Badge>
-                </div>
-                <p className="mt-3 text-base leading-7 text-ink">{note.body}</p>
-              </div>
-              <ChevronRight className="hidden h-7 w-7 text-muted sm:block" aria-hidden="true" />
-            </motion.article>
+            <LogCard note={note} index={index} />
           </Reveal>
         ))}
       </section>
 
       <Reveal>
-        <section className="grid items-center gap-4 rounded-card bg-purple/10 p-5 shadow-float sm:grid-cols-[6rem_1fr]">
-          <FileText className="mx-auto h-14 w-14 text-muted" strokeWidth={1.45} aria-hidden="true" />
-          <p className="text-lg font-semibold leading-8 text-ink">少しずつ試して、使える形に残していきます。</p>
-        </section>
+        <RpgPanel className="p-5 sm:p-6">
+          <div className="relative z-10 flex items-center gap-4">
+            <FileText className="h-10 w-10 shrink-0 text-[#fff2a7]" strokeWidth={1.6} aria-hidden="true" />
+            <div>
+              <RpgLabel>NEXT LOG</RpgLabel>
+              <p className="mt-3 text-base font-bold leading-8 text-[#eef8ff]">
+                少しずつ試して、使える形に残していきます。
+              </p>
+            </div>
+          </div>
+        </RpgPanel>
       </Reveal>
     </div>
+  );
+}
+
+function LogCard({
+  note,
+  index,
+}: {
+  note: {
+    date: string;
+    title: string;
+    body: string;
+    tag: string;
+    accent: Accent;
+    icon: LucideIcon;
+    pickup?: boolean;
+  };
+  index: number;
+}) {
+  return (
+    <motion.article
+      whileHover={{ y: -3 }}
+      className={`relative grid gap-4 rounded-md border-2 bg-[#07121b] p-4 text-[#eef8ff] shadow-float sm:grid-cols-[7rem_1fr] sm:items-center ${
+        note.pickup ? "border-[#f4b33d]" : "border-[#d7bb68]"
+      }`}
+    >
+      {note.pickup ? (
+        <div className="absolute right-4 top-4 flex items-center gap-2 rounded-sm border border-[#fff2a7] bg-[#8e4a12] px-3 py-1 text-[11px] font-black tracking-[0.14em] text-white">
+          <Pin className="h-3.5 w-3.5" aria-hidden="true" />
+          PICK UP
+        </div>
+      ) : null}
+
+      <div className="flex items-center gap-4 rounded-sm border border-[#f2e9c6]/55 bg-[#10283b] p-3 sm:flex-col sm:justify-center">
+        <span className="inline-flex h-12 min-w-12 items-center justify-center rounded-sm border border-[#fff2a7] bg-[#07121b] px-2 text-sm font-black text-[#fff2a7]">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <IconFromSheet icon={note.icon} accent={note.accent} />
+      </div>
+
+      <div className="min-w-0 pr-0 sm:pr-20">
+        <div className="flex flex-wrap items-center gap-2">
+          <RpgLabel>{`LOG ${String(index + 1).padStart(2, "0")}`}</RpgLabel>
+          <span className="rounded-sm border border-[#8fdfff]/70 bg-[#0e2a3b] px-3 py-1.5 text-[11px] font-black tracking-[0.14em] text-[#9de3ff]">
+            {note.tag}
+          </span>
+          <time className="text-sm font-black text-[#d9eff6]">{note.date}</time>
+        </div>
+        <h2 className="mt-3 text-xl font-black leading-snug text-white sm:text-2xl">{note.title}</h2>
+        <p className="mt-3 text-sm font-semibold leading-7 text-[#d9eff6] sm:text-base">{note.body}</p>
+      </div>
+    </motion.article>
   );
 }

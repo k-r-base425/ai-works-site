@@ -35,8 +35,13 @@ jobs:
         env:
           PUBLIC_BASE_PATH: /ai-works-site/
 
-      - name: Add SPA fallback
-        run: cp dist/index.html dist/404.html
+      - name: Add route fallbacks
+        run: |
+          cp dist/index.html dist/404.html
+          for route in works works/ai-works can-do process notes profile related qr-guide; do
+            mkdir -p "dist/$route"
+            cp dist/index.html "dist/$route/index.html"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

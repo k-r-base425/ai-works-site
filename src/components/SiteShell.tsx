@@ -106,7 +106,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                   <NavLink
                     key={route.path}
                     to={route.path}
-                    end={route.path === "/"}
+                    end
                     onClick={() => setIsMenuOpen(false)}
                     className={({ isActive }) =>
                       [

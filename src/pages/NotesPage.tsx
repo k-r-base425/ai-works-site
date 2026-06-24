@@ -102,7 +102,7 @@ export function NotesPage() {
                     <span className="rounded-sm border border-[#fff2a7]/80 bg-[#07121b] px-2 py-1 text-center text-[11px] font-black text-[#fff2a7]">
                       LOG {String(index + 1).padStart(2, "0")}
                     </span>
-                    <p className="truncate text-sm font-black text-white">{note.title}</p>
+                    <p className="text-sm font-black leading-6 text-white">{note.title}</p>
                   </div>
                 ))}
               </div>

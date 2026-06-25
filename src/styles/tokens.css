@@ -15,4 +15,21 @@
   --ai-works-pill-radius: 999px;
   --ai-works-soft-shadow: 0 18px 44px rgba(43, 63, 84, 0.1);
   --ai-works-float-shadow: 0 12px 28px rgba(43, 63, 84, 0.08);
+
+  --rpg-bg: #06111c;
+  --rpg-bg-deep: #020913;
+  --rpg-panel: #071522;
+  --rpg-panel-soft: #0e2a3b;
+  --rpg-gold: #d7a947;
+  --rpg-gold-light: #fff0a7;
+  --rpg-cyan: #39dff3;
+  --rpg-magenta: #c51662;
+  --rpg-green: #184b2b;
+  --rpg-purple: #392447;
+  --rpg-amber: #6d4316;
+  --rpg-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+}
+
+.pixel-art {
+  image-rendering: pixelated;
 }

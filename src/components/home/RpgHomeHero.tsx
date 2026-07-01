@@ -6,7 +6,6 @@ import {
   FlaskConical,
   Globe2,
   Headphones,
-  Home,
   Image,
   Map,
   Monitor,
@@ -18,11 +17,9 @@ import {
   Wrench,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { assetPath } from "../../lib/paths";
 import { RpgHomeQuestCard } from "./RpgHomeQuestCard";
 import { RpgHomeStatusBar } from "./RpgHomeStatusBar";
-
-const heroMap = assetPath("/assets/top/hero-map/home-island-map.png");
+import { RpgWorldMap } from "./RpgWorldMap";
 
 const navItems = [
   { href: "/", icon: Swords, label: "ホーム" },
@@ -148,9 +145,7 @@ export function RpgHomeHero() {
             </div>
           </div>
 
-          <div className="relative min-h-[20rem] overflow-hidden rounded-sm border-2 border-[color:var(--rpg-gold)] bg-[color:var(--rpg-bg-deep)] shadow-[var(--rpg-shadow)] lg:min-h-full">
-            <img src={heroMap} alt="" className="pixel-art h-full min-h-[20rem] w-full object-cover" />
-          </div>
+          <RpgWorldMap />
         </div>
 
         <div className="px-4 py-5 sm:px-8">

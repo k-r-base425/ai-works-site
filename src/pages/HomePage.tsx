@@ -3,7 +3,7 @@ import { RpgHomeHero } from "../components/home/RpgHomeHero";
 
 export function HomePage() {
   return (
-    <div className="-mx-4 pb-6 sm:-mx-6 sm:pb-8">
+    <div className="min-h-[100svh] bg-[color:var(--rpg-bg)]">
       <Reveal>
         <RpgHomeHero />
       </Reveal>

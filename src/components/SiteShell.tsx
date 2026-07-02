@@ -37,7 +37,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
   }, [isMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-paper text-ink">
+    <div className={isHomePage ? "min-h-screen bg-[color:var(--rpg-bg)] text-ink" : "min-h-screen bg-paper text-ink"}>
       <header className={`sticky top-0 z-30 border-b border-line/70 bg-white/95 shadow-[0_8px_24px_rgba(43,63,84,0.06)] backdrop-blur ${isHomePage ? "sm:hidden" : ""}`}>
         <div ref={menuRef} className="relative mx-auto max-w-6xl px-4 py-3 sm:px-6">
           <div className="flex items-center justify-between gap-3">
@@ -129,7 +129,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className={`mx-auto w-full px-4 sm:px-6 ${isHomePage ? "max-w-[1536px] py-3 sm:py-6" : "max-w-6xl py-8 sm:py-12"}`}>{children}</main>
+      <main className={isHomePage ? "w-full overflow-hidden" : "mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12"}>{children}</main>
     </div>
   );
 }

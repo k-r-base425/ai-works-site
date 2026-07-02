@@ -9,7 +9,7 @@ type RpgHomeStatusBarProps = {
 
 export function RpgHomeStatusBar({ items }: RpgHomeStatusBarProps) {
   return (
-    <div className="grid gap-3 border-t border-[color:var(--rpg-gold)]/40 px-4 py-5 text-sm font-black text-[#f8edd0] sm:grid-cols-4 sm:px-8">
+    <div className="grid gap-3 border-t border-[color:var(--rpg-gold)]/40 bg-[color:var(--rpg-bg-deep)]/45 px-4 py-5 text-sm font-black text-[#f8edd0] sm:grid-cols-4 sm:px-8 lg:py-4">
       {items.map((item) => (
         <div key={item.label} className="flex items-center justify-center gap-3">
           <item.icon className="h-7 w-7 text-[color:var(--rpg-gold-light)]" strokeWidth={1.7} aria-hidden="true" />

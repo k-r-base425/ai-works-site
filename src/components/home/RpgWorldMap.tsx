@@ -34,8 +34,8 @@ const labelOffset = {
 
 export function RpgWorldMap() {
   return (
-    <div className="rounded-sm border-2 border-[color:var(--rpg-gold)] bg-[color:var(--rpg-bg-deep)] p-1 shadow-[var(--rpg-shadow)]">
-      <div className="relative aspect-[820/565] overflow-hidden rounded-sm">
+    <div className="rounded-sm border-2 border-[color:var(--rpg-gold)] bg-[color:var(--rpg-bg-deep)] p-1 shadow-[var(--rpg-shadow)] lg:h-full">
+      <div className="relative aspect-[820/565] overflow-hidden rounded-sm lg:h-full lg:min-h-[31rem] lg:aspect-auto xl:min-h-[34rem]">
         <img src={heroMap} alt="" className="pixel-art h-full w-full object-cover" />
         <div className="absolute inset-0">
           {hotspots.map((spot) => (

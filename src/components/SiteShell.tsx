@@ -13,6 +13,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
   const isHomePage = location.pathname === "/";
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  useEffect(() => {
     if (!isMenuOpen) return;
 
     function handleKeyDown(event: KeyboardEvent) {

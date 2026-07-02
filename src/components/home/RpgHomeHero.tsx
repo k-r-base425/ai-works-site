@@ -1,15 +1,12 @@
 import {
   BarChart3,
   BookOpenText,
-  BriefcaseBusiness,
   FileText,
   FlaskConical,
   Globe2,
-  Headphones,
   Image,
   Map,
   Monitor,
-  ScrollText,
   ShieldCheck,
   Sparkles,
   Star,
@@ -20,14 +17,6 @@ import { Link } from "react-router-dom";
 import { RpgHomeQuestCard } from "./RpgHomeQuestCard";
 import { RpgHomeStatusBar } from "./RpgHomeStatusBar";
 import { RpgWorldMap } from "./RpgWorldMap";
-
-const navItems = [
-  { href: "/", icon: Swords, label: "ホーム" },
-  { href: "/can-do", icon: ScrollText, label: "できること" },
-  { href: "/works", icon: BriefcaseBusiness, label: "活用シーン" },
-  { href: "/process", icon: ShieldCheck, label: "サポート" },
-  { href: "/profile", icon: Headphones, label: "会社情報" },
-];
 
 const serviceItems = [
   { icon: Monitor, label: "Web・LP制作" },
@@ -70,33 +59,6 @@ export function RpgHomeHero() {
       <div className="pointer-events-none absolute bottom-2 right-2 h-8 w-8 border-b-4 border-r-4 border-[color:var(--rpg-gold-light)]" aria-hidden="true" />
 
       <div className="relative z-10">
-        <header className="hidden items-center justify-between border-b-2 border-[color:var(--rpg-gold)]/70 px-6 py-4 lg:flex xl:px-8">
-          <Link to="/" className="flex items-center gap-4">
-            <span className="grid h-14 w-14 place-items-center rounded-sm border-2 border-[color:var(--rpg-gold-light)] bg-[color:var(--rpg-panel)] text-[color:var(--rpg-cyan)] shadow-[inset_0_0_0_3px_rgba(0,0,0,0.4)]">
-              <Sparkles className="h-8 w-8" fill="currentColor" aria-hidden="true" />
-            </span>
-            <span className="text-[2rem] font-black tracking-[0.04em] text-white">AI WORKS</span>
-          </Link>
-
-          <nav className="flex items-center gap-5 text-sm font-black text-[#f8edd0] xl:gap-7" aria-label="RPG top navigation">
-            {navItems.map((item, index) => (
-              <Link key={item.href} to={item.href} className="relative flex items-center gap-2 transition hover:text-[color:var(--rpg-gold-light)]">
-                <item.icon className="h-6 w-6 text-[color:var(--rpg-gold-light)]" strokeWidth={1.7} aria-hidden="true" />
-                {item.label}
-                {index === 0 ? <span className="absolute -bottom-5 left-1/2 h-1 w-16 -translate-x-1/2 bg-[color:var(--rpg-gold-light)] shadow-[0_0_14px_var(--rpg-gold-light)]" /> : null}
-              </Link>
-            ))}
-          </nav>
-
-          <Link
-            to="/qr-guide"
-            className="inline-flex min-h-12 items-center gap-3 rounded-sm border-2 border-[color:var(--rpg-gold-light)] bg-[color:var(--rpg-magenta)] px-5 text-sm font-black text-white shadow-[0_5px_0_rgba(0,0,0,0.5)] transition hover:-translate-y-0.5"
-          >
-            <Sparkles className="h-5 w-5 text-[color:var(--rpg-gold-light)]" aria-hidden="true" />
-            お問い合わせ
-          </Link>
-        </header>
-
         <div className="grid gap-4 border-b-2 border-[color:var(--rpg-gold)]/60 p-4 sm:p-6 lg:grid-cols-[38%_1fr] lg:gap-5 lg:p-5 xl:grid-cols-[40%_1fr] xl:p-6">
           <div className="relative rounded-sm border-2 border-[color:var(--rpg-gold)] bg-[color:var(--rpg-panel)] p-5 shadow-[var(--rpg-shadow)] sm:p-6 lg:p-5 xl:p-6">
             <div className="absolute right-2 top-2 h-6 w-6 border-r-2 border-t-2 border-[color:var(--rpg-gold-light)]" aria-hidden="true" />

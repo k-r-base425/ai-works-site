@@ -131,7 +131,7 @@ export function IconFromSheet({ icon: Icon, accent = "blue" }: { icon: LucideIco
   return (
     <span
       className={joinClasses(
-        "inline-flex h-14 w-14 items-center justify-center rounded-2xl border bg-white shadow-float",
+        "inline-flex h-14 w-14 items-center justify-center rounded-sm border-2 bg-[#10283b] shadow-[inset_0_0_0_2px_rgba(255,242,167,0.08),0_12px_24px_rgba(0,0,0,0.2)]",
         accentStyles[accent].border,
         accentStyles[accent].text,
       )}

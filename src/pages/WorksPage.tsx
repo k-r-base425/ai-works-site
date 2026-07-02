@@ -55,7 +55,7 @@ export function WorksPage() {
   return (
     <div className="space-y-8 pb-8">
       <Reveal>
-        <RpgPanel className="-mx-4 px-5 py-7 sm:mx-0 sm:px-8">
+        <RpgPanel className="px-5 py-7 sm:px-8">
           <div className="absolute inset-0 bg-[linear-gradient(135deg,#07121b_0%,#10283b_52%,#173a28_100%)]" aria-hidden="true" />
           <div className="absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,242,167,0.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,242,167,0.22)_1px,transparent_1px)] [background-size:22px_22px]" aria-hidden="true" />
           <div className="relative z-10 grid gap-7 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">

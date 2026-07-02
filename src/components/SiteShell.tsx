@@ -1,10 +1,16 @@
-import { ImageIcon, Lightbulb, Menu, UserRound, X } from "lucide-react";
+import { BriefcaseBusiness, Headphones, Mail, Menu, ScrollText, ShieldCheck, Sparkles, Swords, X } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { routes } from "../data/site";
+import { RpgPageFrame } from "./RpgPageFrame";
 
-const navIcons = [ImageIcon, Lightbulb, UserRound];
-const primaryRoutes = routes.filter((route) => route.navGroup === "primary");
+const desktopNavItems = [
+  { href: "/", icon: Swords, label: "ホーム" },
+  { href: "/can-do", icon: ScrollText, label: "できること" },
+  { href: "/works", icon: BriefcaseBusiness, label: "活用シーン" },
+  { href: "/process", icon: ShieldCheck, label: "サポート" },
+  { href: "/profile", icon: Headphones, label: "会社情報" },
+];
 
 export function SiteShell({ children }: { children: ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,49 +47,63 @@ export function SiteShell({ children }: { children: ReactNode }) {
   }, [isMenuOpen]);
 
   return (
-    <div className={isHomePage ? "min-h-screen bg-[color:var(--rpg-bg)] text-ink" : "min-h-screen bg-paper text-ink"}>
-      <header className={`sticky top-0 z-30 border-b border-line/70 bg-white/95 shadow-[0_8px_24px_rgba(43,63,84,0.06)] backdrop-blur ${isHomePage ? "sm:hidden" : ""}`}>
-        <div ref={menuRef} className="relative mx-auto max-w-6xl px-4 py-3 sm:px-6">
+    <div className="min-h-screen bg-[color:var(--rpg-bg)] text-ink">
+      <header className="sticky top-0 z-30 border-b-2 border-[color:var(--rpg-gold)]/70 bg-[color:var(--rpg-bg-deep)]/96 text-[#eef8ff] shadow-[0_10px_28px_rgba(0,0,0,0.34)] backdrop-blur">
+        <div ref={menuRef} className="relative mx-auto max-w-[1440px] px-4 py-3 sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <NavLink
               to="/"
-              className="flex items-center gap-2.5 rounded-full text-2xl font-bold tracking-normal text-ink"
+              className="flex items-center gap-2.5 text-2xl font-black tracking-normal text-white"
               onClick={() => setIsMenuOpen(false)}
             >
-              <span className="relative h-8 w-9" aria-hidden="true">
-                <span className="absolute left-0 top-1 h-7 w-3 rotate-[-34deg] rounded-full bg-teal" />
-                <span className="absolute left-3 top-1 h-7 w-3 rotate-[34deg] rounded-full bg-blue" />
-                <span className="absolute left-6 top-1 h-7 w-3 rotate-[-34deg] rounded-full bg-purple" />
+              <span className="grid h-10 w-10 place-items-center rounded-sm border-2 border-[color:var(--rpg-gold-light)] bg-[color:var(--rpg-panel)] text-[color:var(--rpg-cyan)] shadow-[inset_0_0_0_2px_rgba(0,0,0,0.4)]" aria-hidden="true">
+                <Sparkles className="h-6 w-6" fill="currentColor" />
               </span>
               <span>AI WORKS</span>
             </NavLink>
 
-          <nav className="hidden items-center gap-5 sm:flex" aria-label="main navigation">
-            {primaryRoutes.map((route, index) => {
-              const Icon = navIcons[index] ?? ImageIcon;
+          <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="main navigation">
+            {desktopNavItems.map((item) => {
+              const Icon = item.icon;
               return (
                 <NavLink
-                  key={route.path}
-                  to={route.path}
+                  key={item.href}
+                  to={item.href}
+                  end={item.href === "/"}
                   className={({ isActive }) =>
                     [
-                      "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-semibold transition",
-                      isActive ? "bg-blue/10 text-blue-deep" : "text-ink hover:bg-fog",
+                      "relative flex items-center gap-2 border border-transparent px-2 py-2 text-sm font-black transition hover:text-[color:var(--rpg-gold-light)] xl:px-3",
+                      isActive
+                        ? "text-white after:absolute after:-bottom-3 after:left-1/2 after:h-1 after:w-16 after:-translate-x-1/2 after:bg-[color:var(--rpg-gold-light)] after:shadow-[0_0_14px_var(--rpg-gold-light)]"
+                        : "text-[#f8edd0]",
                     ].join(" ")
                   }
                 >
-                  <Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" />
-                  {route.navLabel ?? route.label}
+                  <Icon className="h-5 w-5 text-[color:var(--rpg-gold-light)]" strokeWidth={1.7} aria-hidden="true" />
+                  {item.label}
                 </NavLink>
               );
             })}
           </nav>
 
+          <NavLink
+            to="/qr-guide"
+            className={({ isActive }) =>
+              [
+                "hidden min-h-12 items-center gap-3 rounded-sm border-2 border-[color:var(--rpg-gold-light)] bg-[color:var(--rpg-magenta)] px-5 text-sm font-black text-white shadow-[0_5px_0_rgba(0,0,0,0.5)] transition hover:-translate-y-0.5 lg:inline-flex",
+                isActive ? "ring-2 ring-[color:var(--rpg-gold-light)] ring-offset-2 ring-offset-[color:var(--rpg-bg-deep)]" : "",
+              ].join(" ")
+            }
+          >
+            <Mail className="h-5 w-5 text-[color:var(--rpg-gold-light)]" strokeWidth={1.8} aria-hidden="true" />
+            お問い合わせ
+          </NavLink>
+
           <button
             type="button"
             aria-controls="mobile-command-menu"
             aria-expanded={isMenuOpen}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-line bg-white text-ink shadow-float sm:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-sm border-2 border-[color:var(--rpg-gold)] bg-[color:var(--rpg-panel)] text-[color:var(--rpg-gold-light)] shadow-float lg:hidden"
             aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
             onClick={() => setIsMenuOpen((current) => !current)}
           >
@@ -133,7 +153,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className={isHomePage ? "w-full overflow-hidden" : "mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12"}>{children}</main>
+      <main className={isHomePage ? "w-full overflow-hidden" : "w-full overflow-hidden"}>
+        {isHomePage ? children : <RpgPageFrame>{children}</RpgPageFrame>}
+      </main>
     </div>
   );
 }
